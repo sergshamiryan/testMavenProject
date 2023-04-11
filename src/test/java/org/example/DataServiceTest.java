@@ -1,14 +1,14 @@
 package org.example;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 
-import static org.example.Race.HOBBIT;
-import static org.example.Race.MAIA;
+import static org.example.Race.*;
 import static org.junit.jupiter.api.Assertions.*;
+
 
 public class DataServiceTest {
 
@@ -85,8 +85,41 @@ public class DataServiceTest {
         assertTrue(fellowship.contains(tolkienCharacter));
     }
 
+    @Tag("slow")
+    @DisplayName("Minimal stress testing: run this test 1000 times to ")
+    @RepeatedTest(1000)
+    void ensureThatWeCanRetrieveFellowshipMultipleTimes() {
+        dataService = new DataService();
+        assertNotNull(dataService.getFellowship());
+    }
 
+    @Test
+    void ensureOrdering() {
+        List<TolkienCharacter> fellowship = dataService.getFellowship();
+        // ensure that the order of the fellowship is:
+        // frodo, sam, merry,pippin, gandalf,legolas,gimli,aragorn,boromir
+        assertEquals(fellowship.get(0), dataService.getFellowshipCharacter("Frodo"));
+    }
 
+    @Test
+    void ensureAge() {
+        List<TolkienCharacter> fellowship = dataService.getFellowship();
+        // TODO test ensure that all hobbits and men are younger than 100 years
+        // TODO also ensure that the elfs, dwars the maia are all older than 100 years
+        fellowship.stream()
+                .filter((n) -> n.getRace().equals(HOBBIT) || n.getRace().equals(MAN))
+                .allMatch((n) -> n.age < 100);
+    }
 
+    @Test
+    void ensureThatFellowsStayASmallGroup() {
+        List<TolkienCharacter> fellowship = dataService.getFellowship();
+        assertThrows(IndexOutOfBoundsException.class, () -> fellowship.get(20));
+    }
+
+    @Test
+    void assertTimout(){
+        assertTimeout(Duration.ofMillis(3000),() -> dataService.update());
+    }
 
 }

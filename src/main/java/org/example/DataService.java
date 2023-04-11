@@ -71,7 +71,9 @@ public class DataService {
 
     public TolkienCharacter getFellowshipCharacter(String name) {
         List<TolkienCharacter> list = getFellowship();
-        return list.stream().filter(s-> s.getName().equals(name)).findFirst().get();
+        TolkienCharacter character = list.stream().filter(s-> s.getName().equals(name)).findFirst()
+                .orElse(null);
+        return character ;
     }
 
     public Map<Ring, TolkienCharacter> getRingBearers() {
@@ -84,6 +86,15 @@ public class DataService {
         ringBearers.put(Ring.vilya, elrond);
         ringBearers.put(Ring.oneRing, frodo);
         return  ringBearers;
+    }
+
+    boolean update(){
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 
 }
