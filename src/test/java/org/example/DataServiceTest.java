@@ -122,4 +122,31 @@ public class DataServiceTest {
         assertTimeout(Duration.ofMillis(3000),() -> dataService.update());
     }
 
+
+    @Test
+    @DisplayName("Ensure that access to the fellowship throws exception outside the valid range")
+    void exceptionTesting() {
+        DataService dataService = new DataService();
+        Throwable exception = assertThrows(IndexOutOfBoundsException.class, () -> dataService.getFellowship().get(20));
+        assertEquals("Index 20 out of bounds for length 9", exception.getMessage());
+    }
+
+    @Test
+    public void ensureThatAgeMustBeLargerThanZeroViaSetter() {
+        TolkienCharacter frodo = new TolkienCharacter("Frodo", 33, HOBBIT);
+        // use assertThrows() rule to check that the message is:
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,() -> frodo.setAge(-1));
+        assertEquals("Age is not allowed to be smaller than zero",ex.getMessage());
+        // Age is not allowed to be smaller than zero
+    }
+
+    @Test
+    public void testThatAgeMustBeLargerThanZeroViaConstructor() {
+        // use assertThrows() rule to check that an IllegalArgumentException exception is thrown and
+        // that the message is:
+        // "Age is not allowed to be smaller than zero"
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,() -> new TolkienCharacter("Frodo", -1, HOBBIT));
+        assertEquals("Age is not allowed to be smaller than zero",ex.getMessage());
+    }
+
 }

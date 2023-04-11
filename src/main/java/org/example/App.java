@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Arrays;
+
 /**
  * Hello world!
  *
@@ -7,6 +9,6 @@ package org.example;
 public class App 
 {
     public static void main( String[] args ) {
-        System.out.println( "Hello World!" );
+        int[][] celsiusFahrenheitMapping = new int[][] { { 10, 50 }, { 40, 104 }, { 0, 32 } };
     }
 }

@@ -12,6 +12,7 @@ public class TolkienCharacter {
 
     public TolkienCharacter(String name, int age, Race race) {
         this.name = name;
+        if (age < 0) throw new IllegalArgumentException("Age is not allowed to be smaller than zero");
         this.age = age;
         this.race = race;
     }
