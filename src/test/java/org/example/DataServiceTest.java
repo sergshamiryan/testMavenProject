@@ -23,7 +23,7 @@ public class DataServiceTest {
         // TODO check that name is "Frodo"
         assertEquals(frodo.getName(), "Frodo", "Frodos charachter has wrong name");
         // TODO check that name is not "Frodon"
-        assertNotEquals(frodo.getName(),"frodon","Frodos name should not be Frodon");
+        assertNotEquals(frodo.getName(), "frodon", "Frodos name should not be Frodon");
     }
 
     @Test
@@ -32,16 +32,31 @@ public class DataServiceTest {
         Object jakeClone = new TolkienCharacter("Jake", 12, HOBBIT);
         Object sameJake = jake;
         // jake is equal to sameJake
-        assertEquals(jake,sameJake,"Not equal Jake");
+        assertEquals(jake, sameJake, "Not equal Jake");
         // jake is not equal to jakeClone
-        assertNotEquals(jake,jakeClone,"Jake is equal to JakeClone");
+        assertNotEquals(jake, jakeClone, "Jake is equal to JakeClone");
     }
 
     @Test
     void checkInheritance() {
         TolkienCharacter tolkienCharacter = dataService.getFellowship().get(0);
         // TODO check that tolkienCharacter.getClass is not a movie class
-        assertFalse(tolkienCharacter.getClass().isAssignableFrom(Movie.class));
+        assertFalse(Movie.class.isAssignableFrom(tolkienCharacter.getClass()));
     }
+
+    @Test
+    void ensureFellowShipCharacterAccessByNameReturnsNullForUnknownCharacter() {
+        // TODO imlement a check that dataService.getFellowshipCharacter returns null for an
+        TolkienCharacter fellowshipCharacter = dataService.getFellowshipCharacter("Lars");
+        assertNull(fellowshipCharacter);
+    }
+
+    @Test
+    void ensureFellowShipCharacterAccessByNameWorksGivenCorrectNameIsGiven() {
+        // TODO imlement a check that dataService.getFellowshipCharacter returns a fellow for an
+        // existing felllow, e.g. "Frodo"
+        assertNotNull(dataService.getFellowshipCharacter("Frodo"));
+    }
+
 
 }
