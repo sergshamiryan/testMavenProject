@@ -3,7 +3,11 @@ package org.example;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+import java.util.Map;
+
 import static org.example.Race.HOBBIT;
+import static org.example.Race.MAIA;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DataServiceTest {
@@ -55,8 +59,34 @@ public class DataServiceTest {
     void ensureFellowShipCharacterAccessByNameWorksGivenCorrectNameIsGiven() {
         // TODO imlement a check that dataService.getFellowshipCharacter returns a fellow for an
         // existing felllow, e.g. "Frodo"
-        assertNotNull(dataService.getFellowshipCharacter("Frodo"));
+        TolkienCharacter fellowshipCharacter = dataService.getFellowshipCharacter("Aragorn");
+        assertNotNull(fellowshipCharacter);
     }
+
+    @Test
+    void ensureThatFrodoAndGandalfArePartOfTheFellowsip() {
+
+        List<TolkienCharacter> fellowship = dataService.getFellowship();
+        TolkienCharacter frodo = new TolkienCharacter("Frodo", 33, HOBBIT);
+        TolkienCharacter gandalf = new TolkienCharacter("Gandalf", 2020, MAIA);
+
+        assertTrue(fellowship.contains(frodo));
+        assertTrue(fellowship.contains(gandalf));
+    }
+
+    @Test
+    void ensureThatOneRingBearerIsPartOfTheFellowship() {
+
+        List<TolkienCharacter> fellowship = dataService.getFellowship();
+        // TODO test that at least one ring bearer is part of the fellowship
+        Map<Ring, TolkienCharacter> bearers = dataService.getRingBearers();
+        TolkienCharacter tolkienCharacter = bearers.get(Ring.oneRing);
+
+        assertTrue(fellowship.contains(tolkienCharacter));
+    }
+
+
+
 
 
 }
