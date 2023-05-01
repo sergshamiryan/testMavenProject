@@ -1,12 +1,16 @@
-package org.example;
+package org.example.junit;
 
+import org.example.junit.DataService;
+import org.example.junit.Movie;
+import org.example.junit.Ring;
+import org.example.junit.TolkienCharacter;
 import org.junit.jupiter.api.*;
 
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 
-import static org.example.Race.*;
+import static org.example.junit.Race.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 

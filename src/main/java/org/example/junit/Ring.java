@@ -1,4 +1,4 @@
-package org.example;
+package org.example.junit;
 
 @Magical
 public enum Ring {

@@ -1,3 +1,5 @@
+package org.example.junit;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -8,7 +10,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UsingNestedTests {
+public class UsingNestedTests extends ConverterUtilTest {
 
     private List<String> list;
 
@@ -38,6 +40,8 @@ public class UsingNestedTests {
             assertEquals(("Mockito"), list.get(1));
         }
 
+
     }
+
 
 }

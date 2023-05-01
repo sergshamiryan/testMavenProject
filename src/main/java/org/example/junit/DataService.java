@@ -1,8 +1,8 @@
-package org.example;
+package org.example.junit;
 
 import java.util.*;
 
-import static org.example.Race.*;
+import static org.example.junit.Race.*;
 
 public class DataService {
 

@@ -1,4 +1,4 @@
-package org.example;
+package org.example.junit;
 
 import java.util.Date;
 
@@ -50,5 +50,7 @@ public class Movie {
         } else if (!title.equals(other.title)) return false;
         return true;
     }
+
+
 
 }
